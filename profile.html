@@ -68,3 +68,35 @@
                         <p>Запросил Дмитрий · ожидает подтверждения</p>
                         <span class="status-badge status-pending">Ожидает</span>
                         <button class="btn-small">Подтвердить</button>
+                    </div>
+                </div>
+                <div class="rental-card">
+                    <img src="images/drill.jpg" class="rental-card__image">
+                    <div class="rental-card__info">
+                        <h3>Аккумуляторная дрель Makita</h3>
+                        <p>Свободно · можно сдать</p>
+                        <span class="status-badge status-active">Активно</span>
+                        <button class="btn-small">Редактировать</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tabs = document.querySelectorAll('.profile-tab');
+        const contents = document.querySelectorAll('.profile-tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                contents.forEach(c => c.classList.remove('active'));
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
