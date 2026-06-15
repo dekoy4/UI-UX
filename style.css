@@ -616,6 +616,26 @@ body {
     margin-top: 16px;
 }
 
+/* ========== NO RESULTS ========== */
+.no-results {
+    text-align: center;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 24px;
+    margin-top: 20px;
+}
+
+.no-results__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.no-results p {
+    color: #6B7280;
+    font-size: 16px;
+}
+
 /* ========== ADAPTIVE (MOBILE) ========== */
 @media (max-width: 768px) {
     .container {
