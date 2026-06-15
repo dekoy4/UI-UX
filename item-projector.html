@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Проектор XGIMI — Сосед.Велком</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <div class="logo">
+                        <span class="logo__icon">🏠</span>
+                        <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
+                    </div>
+                    <nav class="nav">
+                        <a href="index.html" class="nav__link">Главная</a>
+                        <a href="profile.html" class="nav__link">Мои аренды</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="item-layout">
+                <div class="item-gallery">
+                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=800&h=600&fit=crop" alt="Проектор XGIMI" class="item__main-image">
+                </div>
+
+                <div class="item-info">
+                    <div class="item__price">400 ₽ <span>/ сутки</span></div>
+                    <h1 class="item__title">Проектор XGIMI Halo+</h1>
+                    
+                    <div class="owner-card">
+                        <img src="https://randomuser.me/api/portraits/men/91.jpg" class="owner-card__avatar" alt="Максим">
+                        <div class="owner-card__info">
+                            <div class="owner-card__name">Максим, 27 лет</div>
+                            <div class="owner-card__rating">⭐ 4.9 · 31 отзыв · Живет в 200 м</div>
+                            <div class="owner-card__verified">✓ Верифицированный сосед</div>
+                        </div>
+                    </div>
+
+                    <div class="item-tabs">
+                        <button class="item-tab active" data-tab="desc">Описание</button>
+                        <button class="item-tab" data-tab="rules">Правила</button>
+                    </div>
+
+                    <div class="item-tab-content active" id="desc">
+                        <p>Портативный проектор XGIMI Halo+ с аккумулятором. Разрешение 1080p, яркость 900 люмен, встроенный Android TV, автоподстройка фокуса. Можно смотреть YouTube, Netflix, KinoPoisk. Заряда хватает на 2 часа фильма, можно подключить к розетке. В комплекте: проектор, пульт, чехол, зарядка.</p>
+                        <p><strong>Идеально для:</strong> Киновечеров, презентаций, игр (HDMI вход)</p>
+                        <p><strong>Комплект:</strong> Проектор + пульт + блок питания + чехол</p>
+                    </div>
+
+                    <div class="item-tab-content" id="rules">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>Использовать в чистом помещении</li>
+                            <li>Не включать без присмотра</li>
+                            <li>Протирать объектив только сухой салфеткой</li>
+                            <li>Залог 3000 ₽, возвращается после проверки</li>
+                        </ul>
+                    </div>
+
+                    <div class="booking-card">
+                        <div class="booking-card__dates">
+                            <div class="date-field">
+                                <label>С</label>
+                                <input type="date" id="startDate" class="date-input">
+                            </div>
+                            <div class="date-field">
+                                <label>По</label>
+                                <input type="date" id="endDate" class="date-input">
+                            </div>
+                        </div>
+                        <div class="booking-card__total">
+                            <span>Итого за 1 сутки:</span>
+                            <strong id="totalPrice">400 ₽</strong>
+                        </div>
+                        <button class="btn-primary btn-block" onclick="location.href='booking.html'">Снять</button>
+                        <div class="booking-card__hint">Напишите соседу в чат после бронирования</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const startInput = document.getElementById('startDate');
+        const endInput = document.getElementById('endDate');
+        const totalSpan = document.getElementById('totalPrice');
+        const pricePerDay = 400;
+
+        function calculateTotal() {
+            if (startInput.value && endInput.value) {
+                const start = new Date(startInput.value);
+                const end = new Date(endInput.value);
+                const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+                if (days > 0) {
+                    const total = days * pricePerDay;
+                    totalSpan.innerText = total + ' ₽';
+                } else {
+                    totalSpan.innerText = pricePerDay + ' ₽';
+                }
+            } else {
+                totalSpan.innerText = pricePerDay + ' ₽';
+            }
+        }
+
+        startInput.addEventListener('change', calculateTotal);
+        endInput.addEventListener('change', calculateTotal);
+
+        const today = new Date().toISOString().split('T')[0];
+        startInput.value = today;
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        endInput.value = tomorrow.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
