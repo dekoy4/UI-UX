@@ -82,6 +82,7 @@
   - snowboard.jpg - Сноуборд Burton
   - ladder.jpg - Стремянка
   - projector.jpg - Проектор XGIMI
+  - powerbank.jpg - Повербанк
   - avatar-anton.jpg - Аватар Антона
   - avatar-ekaterina.jpg - Аватар Екатерины
   - avatar-oleg.jpg - Аватар Олега
