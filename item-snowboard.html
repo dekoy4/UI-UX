@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Сноуборд Burton — Сосед.Велком</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <div class="logo">
+                        <span class="logo__icon">🏠</span>
+                        <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
+                    </div>
+                    <nav class="nav">
+                        <a href="index.html" class="nav__link">Главная</a>
+                        <a href="profile.html" class="nav__link">Мои аренды</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="item-layout">
+                <div class="item-gallery">
+                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=800&h=600&fit=crop" alt="Сноуборд Burton" class="item__main-image">
+                </div>
+
+                <div class="item-info">
+                    <div class="item__price">500 ₽ <span>/ сутки</span></div>
+                    <h1 class="item__title">Сноуборд Burton 158 см</h1>
+                    
+                    <div class="owner-card">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="owner-card__avatar" alt="Екатерина">
+                        <div class="owner-card__info">
+                            <div class="owner-card__name">Екатерина, 29 лет</div>
+                            <div class="owner-card__rating">⭐ 5.0 · 12 отзывов · Живет в 45 м</div>
+                            <div class="owner-card__verified">✓ Верифицированный сосед</div>
+                        </div>
+                    </div>
+
+                    <div class="item-tabs">
+                        <button class="item-tab active" data-tab="desc">Описание</button>
+                        <button class="item-tab" data-tab="rules">Правила</button>
+                    </div>
+
+                    <div class="item-tab-content active" id="desc">
+                        <p>Сноуборд Burton 2023 года, размер 158 см. Идеален для среднего и продвинутого уровня. Крепления Burton Custom. Доска в отличном состоянии — каталась всего 5 раз в Сочи. Скользяк намазан, канты заточены. Полный комплект: доска, крепления, чехол.</p>
+                        <p><strong>Ростовка:</strong> под рост 170-185 см</p>
+                        <p><strong>Состояние:</strong> Отличное, царапин нет</p>
+                    </div>
+
+                    <div class="item-tab-content" id="rules">
+                        <ul style="margin: 0; padding-left: 20px;">
+                            <li>Не кататься по камням и асфальту</li>
+                            <li>Вернуть в чистом виде (можно протереть)</li>
+                            <li>При поломке креплений — сообщить сразу</li>
+                            <li>Залог 2000 ₽, возвращается после проверки</li>
+                        </ul>
+                    </div>
+
+                    <div class="booking-card">
+                        <div class="booking-card__dates">
+                            <div class="date-field">
+                                <label>С</label>
+                                <input type="date" id="startDate" class="date-input">
+                            </div>
+                            <div class="date-field">
+                                <label>По</label>
+                                <input type="date" id="endDate" class="date-input">
+                            </div>
+                        </div>
+                        <div class="booking-card__total">
+                            <span>Итого за 1 сутки:</span>
+                            <strong id="totalPrice">500 ₽</strong>
+                        </div>
+                        <button class="btn-primary btn-block" onclick="location.href='booking.html'">Снять</button>
+                        <div class="booking-card__hint">Напишите соседу в чат после бронирования</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const startInput = document.getElementById('startDate');
+        const endInput = document.getElementById('endDate');
+        const totalSpan = document.getElementById('totalPrice');
+        const pricePerDay = 500;
+
+        function calculateTotal() {
+            if (startInput.value && endInput.value) {
+                const start = new Date(startInput.value);
+                const end = new Date(endInput.value);
+                const days = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+                if (days > 0) {
+                    const total = days * pricePerDay;
+                    totalSpan.innerText = total + ' ₽';
+                } else {
+                    totalSpan.innerText = pricePerDay + ' ₽';
+                }
+            } else {
+                totalSpan.innerText = pricePerDay + ' ₽';
+            }
+        }
+
+        startInput.addEventListener('change', calculateTotal);
+        endInput.addEventListener('change', calculateTotal);
+
+        const today = new Date().toISOString().split('T')[0];
+        startInput.value = today;
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        endInput.value = tomorrow.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
