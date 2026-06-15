@@ -633,3 +633,37 @@ body {
 
     .item-layout {
         grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .rental-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .booking-card__dates {
+        grid-template-columns: 1fr;
+    }
+
+    .categories {
+        gap: 20px;
+    }
+
+    .search-bar {
+        flex-direction: column;
+    }
+
+    .search-bar__button {
+        width: 100%;
+    }
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
