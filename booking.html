@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование — Сосед.Велком</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <div class="logo">
+                        <span class="logo__icon">🏠</span>
+                        <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="booking-container">
+                <h1 class="booking-title">Подтверждение бронирования</h1>
+                
+                <div class="booking-summary">
+                    <div class="booking-item">
+                        <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&h=100&fit=crop" class="booking-item__image" alt="Дрель">
+                        <div class="booking-item__info">
+                            <h3>Аккумуляторная дрель Makita</h3>
+                            <p>Антон · 15 м от вас</p>
+                        </div>
+                    </div>
+
+                    <div class="booking-dates">
+                        <div><strong>С 15 мая</strong></div>
+                        <div><strong>По 16 мая</strong> (1 сутки)</div>
+                    </div>
+
+                    <div class="booking-price-list">
+                        <div class="price-row">
+                            <span>Аренда (1 сутки × 300 ₽)</span>
+                            <span>300 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Залог (возвратный)</span>
+                            <span>500 ₽</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Итого к оплате</span>
+                            <span>800 ₽</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-message">
+                        <label>Сообщение для Антона (необязательно)</label>
+                        <textarea rows="3" placeholder="Напишите, когда удобно забрать..."></textarea>
+                    </div>
+
+                    <button class="btn-primary btn-block" onclick="alert('Запрос отправлен! Скоро с вами свяжется сосед ✅')">Отправить запрос</button>
+                    <div class="booking-note">
+                        🔒 Оплата только после подтверждения соседом. Залог заморозится на карте.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
