@@ -39,6 +39,7 @@
                 <button class="profile-tab" data-tab="lending">Сдают у меня</button>
             </div>
 
+            <!-- Вкладка: Арендую я (то, что Алексей арендует у других) -->
             <div class="profile-tab-content active" id="renting">
                 <div class="rental-card">
                     <img src="images/snowboard.jpg" class="rental-card__image">
@@ -60,30 +61,47 @@
                 </div>
             </div>
 
+            <!-- Вкладка: Сдают у меня (собственные товары Алексея) -->
             <div class="profile-tab-content" id="lending">
                 <div class="rental-card">
-                    <img src="images/ladder.jpg" class="rental-card__image">
+                    <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100&h=100&fit=crop" class="rental-card__image">
                     <div class="rental-card__info">
-                        <h3>Стремянка алюминиевая 4 ступени</h3>
-                        <p>Запросил Дмитрий · ожидает подтверждения</p>
-                        <span class="status-badge status-pending">Ожидает</span>
-                        <button class="btn-small">Подтвердить</button>
-                    </div>
-                </div>
-                <div class="rental-card">
-                    <img src="images/drill.jpg" class="rental-card__image">
-                    <div class="rental-card__info">
-                        <h3>Аккумуляторная дрель Makita</h3>
-                        <p>Свободно · можно сдать</p>
+                        <h3>Павербанк Baseus 20000 mAh</h3>
+                        <p>Свободно · 300 ₽/сутки</p>
                         <span class="status-badge status-active">Активно</span>
                         <button class="btn-small">Редактировать</button>
                     </div>
+                </div>
+                <div class="empty-state">
+                    <span class="empty-state__icon">📦</span>
+                    <p>Хотите сдавать больше вещей?</p>
+                    <button class="btn-secondary">+ Добавить объявление</button>
                 </div>
             </div>
         </div>
     </div>
 
+    <style>
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 24px;
+            margin-top: 20px;
+        }
+        .empty-state__icon {
+            font-size: 48px;
+            display: block;
+            margin-bottom: 16px;
+        }
+        .empty-state p {
+            color: #6B7280;
+            margin-bottom: 20px;
+        }
+    </style>
+
     <script>
+        // Переключение табов
         const tabs = document.querySelectorAll('.profile-tab');
         const contents = document.querySelectorAll('.profile-tab-content');
 
