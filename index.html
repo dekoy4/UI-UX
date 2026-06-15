@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Сосед.Велком — Аренда вещей у соседей</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Шапка -->
+        <header class="header">
+            <div class="container">
+                <div class="header__inner">
+                    <div class="logo">
+                        <span class="logo__icon">🏠</span>
+                        <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
+                    </div>
+                    <nav class="nav">
+                        <a href="index.html" class="nav__link active">Главная</a>
+                        <a href="profile.html" class="nav__link">Мои аренды</a>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Поиск и герой -->
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Возьми у соседа<br>на пару дней</h1>
+                <p class="hero__subtitle">Инструменты, спорт, детские товары — всё, что нужно, но покупать жалко</p>
+                
+                <div class="search-bar">
+                    <input type="text" class="search-bar__input" placeholder="Что хотите взять? Например, дрель или проектор">
+                    <button class="search-bar__button">Найти</button>
+                </div>
+
+                <!-- Категории -->
+                <div class="categories">
+                    <div class="categories__item">
+                        <div class="categories__icon">🔧</div>
+                        <span>Инструменты</span>
+                    </div>
+                    <div class="categories__item">
+                        <div class="categories__icon">🏂</div>
+                        <span>Спорт</span>
+                    </div>
+                    <div class="categories__item">
+                        <div class="categories__icon">🧸</div>
+                        <span>Детям</span>
+                    </div>
+                    <div class="categories__item">
+                        <div class="categories__icon">🎉</div>
+                        <span>Праздник</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Лента "Популярное рядом" -->
+        <section class="listings">
+            <div class="container">
+                <div class="listings__header">
+                    <h2 class="listings__title">Популярное рядом</h2>
+                    <span class="listings__badge">Рядом с вами</span>
+                </div>
+                
+                <div class="cards-grid">
+                    <!-- Карточка 1 -->
+                    <div class="card" onclick="location.href='item.html?id=1'">
+                        <div class="card__image">
+                            <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=400&h=300&fit=crop" alt="Дрель">
+                        </div>
+                        <div class="card__content">
+                            <div class="card__price">300 ₽<span>/сутки</span></div>
+                            <h3 class="card__title">Аккумуляторная дрель Makita</h3>
+                            <div class="card__owner">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card__avatar" alt="Аватар">
+                                <span>Антон, 15 м от вас</span>
+                            </div>
+                            <div class="card__rating">⭐ 4.9 (23 отзыва)</div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 2 -->
+                    <div class="card" onclick="location.href='item.html?id=2'">
+                        <div class="card__image">
+                            <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=300&fit=crop" alt="Сноуборд">
+                        </div>
+                        <div class="card__content">
+                            <div class="card__price">500 ₽<span>/сутки</span></div>
+                            <h3 class="card__title">Сноуборд Burton 158 см</h3>
+                            <div class="card__owner">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="card__avatar" alt="Аватар">
+                                <span>Екатерина, 45 м от вас</span>
+                            </div>
+                            <div class="card__rating">⭐ 5.0 (12 отзывов)</div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 3 -->
+                    <div class="card" onclick="location.href='item.html?id=3'">
+                        <div class="card__image">
+                            <img src="https://images.unsplash.com/photo-1503602642458-232111445657?w=400&h=300&fit=crop" alt="Костюм зайчика">
+                        </div>
+                        <div class="card__content">
+                            <div class="card__price">700 ₽<span>/сутки</span></div>
+                            <h3 class="card__title">Костюм зайчика (взрослый, 46-48)</h3>
+                            <div class="card__owner">
+                                <img src="https://randomuser.me/api/portraits/men/45.jpg" class="card__avatar" alt="Аватар">
+                                <span>Дмитрий, 120 м от вас</span>
+                            </div>
+                            <div class="card__rating">⭐ 4.8 (7 отзывов)</div>
+                        </div>
+                    </div>
+
+                    <!-- Карточка 4 -->
+                    <div class="card" onclick="location.href='item.html?id=4'">
+                        <div class="card__image">
+                            <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=400&h=300&fit=crop" alt="Проектор">
+                        </div>
+                        <div class="card__content">
+                            <div class="card__price">400 ₽<span>/сутки</span></div>
+                            <h3 class="card__title">Проектор XGIMI Halo+</h3>
+                            <div class="card__owner">
+                                <img src="https://randomuser.me/api/portraits/men/91.jpg" class="card__avatar" alt="Аватар">
+                                <span>Максим, 200 м от вас</span>
+                            </div>
+                            <div class="card__rating">⭐ 4.9 (31 отзыв)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
