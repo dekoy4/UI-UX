@@ -26,7 +26,7 @@
         <div class="container">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Вы">
+                    <img src="images/avatar-aleksey.jpg" alt="Вы">
                 </div>
                 <div class="profile-info">
                     <h1>Алексей, 28 лет</h1>
@@ -39,10 +39,9 @@
                 <button class="profile-tab" data-tab="lending">Сдают у меня</button>
             </div>
 
-            <!-- Вкладка: Арендую я -->
             <div class="profile-tab-content active" id="renting">
                 <div class="rental-card">
-                    <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=100&h=100&fit=crop" class="rental-card__image">
+                    <img src="images/snowboard.jpg" class="rental-card__image">
                     <div class="rental-card__info">
                         <h3>Сноуборд Burton 158 см</h3>
                         <p>Екатерина · до 20 мая</p>
@@ -51,7 +50,7 @@
                     </div>
                 </div>
                 <div class="rental-card">
-                    <img src="https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=100&h=100&fit=crop" class="rental-card__image">
+                    <img src="images/projector.jpg" class="rental-card__image">
                     <div class="rental-card__info">
                         <h3>Проектор XGIMI Halo+</h3>
                         <p>Максим · завершено 10 мая</p>
@@ -61,45 +60,11 @@
                 </div>
             </div>
 
-            <!-- Вкладка: Сдают у меня (теперь стремянка) -->
             <div class="profile-tab-content" id="lending">
                 <div class="rental-card">
-                    <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=100&h=100&fit=crop" class="rental-card__image">
+                    <img src="images/ladder.jpg" class="rental-card__image">
                     <div class="rental-card__info">
                         <h3>Стремянка алюминиевая 4 ступени</h3>
                         <p>Запросил Дмитрий · ожидает подтверждения</p>
                         <span class="status-badge status-pending">Ожидает</span>
                         <button class="btn-small">Подтвердить</button>
-                    </div>
-                </div>
-                <div class="rental-card">
-                    <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=100&h=100&fit=crop" class="rental-card__image">
-                    <div class="rental-card__info">
-                        <h3>Аккумуляторная дрель Makita</h3>
-                        <p>Свободно · можно сдать</p>
-                        <span class="status-badge status-active">Активно</span>
-                        <button class="btn-small">Редактировать</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Переключение табов
-        const tabs = document.querySelectorAll('.profile-tab');
-        const contents = document.querySelectorAll('.profile-tab-content');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const target = tab.dataset.tab;
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                contents.forEach(c => c.classList.remove('active'));
-                document.getElementById(target).classList.add('active');
-            });
-        });
-    </script>
-    <script src="script.js"></script>
-</body>
-</html>
