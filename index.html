@@ -8,6 +8,7 @@
 </head>
 <body>
     <div class="app">
+        <!-- Шапка -->
         <header class="header">
             <div class="container">
                 <div class="header__inner">
@@ -23,47 +24,37 @@
             </div>
         </header>
 
+        <!-- Поиск и герой -->
         <section class="hero">
             <div class="container">
                 <h1 class="hero__title">Возьми у соседа<br>на пару дней</h1>
-                <p class="hero__subtitle">Инструменты, спорт, детские товары — всё, что нужно, но покупать жалко</p>
+                <p class="hero__subtitle">Инструменты, спорт, товары для праздника — всё, что нужно, но покупать жалко</p>
                 
                 <div class="search-bar">
-                    <input type="text" class="search-bar__input" placeholder="Что хотите взять? Например, дрель или проектор">
-                    <button class="search-bar__button">Найти</button>
+                    <input type="text" id="searchInput" class="search-bar__input" placeholder="Что хотите взять? Например, дрель, сноуборд или проектор">
+                    <button id="searchButton" class="search-bar__button">Найти</button>
                 </div>
 
-                <div class="categories">
-                    <div class="categories__item">
-                        <div class="categories__icon">🔧</div>
-                        <span>Инструменты</span>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__icon">🏂</div>
-                        <span>Спорт</span>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__icon">🧸</div>
-                        <span>Детям</span>
-                    </div>
-                    <div class="categories__item">
-                        <div class="categories__icon">🎉</div>
-                        <span>Праздник</span>
-                    </div>
+                <!-- Сообщение, если ничего не найдено -->
+                <div id="noResults" class="no-results" style="display: none;">
+                    <span class="no-results__icon">🔍</span>
+                    <p>Ничего не найдено. Попробуйте изменить запрос</p>
                 </div>
             </div>
         </section>
 
+        <!-- Лента "Популярное" -->
         <section class="listings">
             <div class="container">
                 <div class="listings__header">
-                    <h2 class="listings__title">Популярное</h2>
-                    <span class="listings__badge">Рекомендуем</span>
+                    <h2 class="listings__title" id="listingsTitle">Популярное</h2>
+                    <span class="listings__badge" id="resultsCount">4 объявления</span>
                 </div>
                 
-                <div class="cards-grid">
-                    <div class="card" onclick="location.href='items/item-drill.html'">
-                        <div class="card__image">
+                <div class="cards-grid" id="cardsGrid">
+                    <!-- Карточка 1 - Дрель Makita -->
+                    <div class="card" data-name="дрель makita аккумуляторная дрель инструмент" data-category="tool">
+                        <div class="card__image" onclick="location.href='items/item-drill.html'">
                             <img src="images/drill.jpg" alt="Дрель">
                         </div>
                         <div class="card__content">
@@ -77,8 +68,9 @@
                         </div>
                     </div>
 
-                    <div class="card" onclick="location.href='items/item-snowboard.html'">
-                        <div class="card__image">
+                    <!-- Карточка 2 - Сноуборд Burton -->
+                    <div class="card" data-name="сноуборд burton доска спорт снег" data-category="sport">
+                        <div class="card__image" onclick="location.href='items/item-snowboard.html'">
                             <img src="images/snowboard.jpg" alt="Сноуборд">
                         </div>
                         <div class="card__content">
@@ -92,8 +84,9 @@
                         </div>
                     </div>
 
-                    <div class="card" onclick="location.href='items/item-ladder.html'">
-                        <div class="card__image">
+                    <!-- Карточка 3 - Стремянка -->
+                    <div class="card" data-name="стремянка лестница алюминий инструмент" data-category="tool">
+                        <div class="card__image" onclick="location.href='items/item-ladder.html'">
                             <img src="images/ladder.jpg" alt="Стремянка">
                         </div>
                         <div class="card__content">
@@ -107,8 +100,9 @@
                         </div>
                     </div>
 
-                    <div class="card" onclick="location.href='items/item-projector.html'">
-                        <div class="card__image">
+                    <!-- Карточка 4 - Проектор XGIMI -->
+                    <div class="card" data-name="проектор xgimi halo кино фильм техника" data-category="tech">
+                        <div class="card__image" onclick="location.href='items/item-projector.html'">
                             <img src="images/projector.jpg" alt="Проектор">
                         </div>
                         <div class="card__content">
@@ -127,5 +121,74 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Поисковая система
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const cards = document.querySelectorAll('.card');
+        const listingsTitle = document.getElementById('listingsTitle');
+        const resultsCount = document.getElementById('resultsCount');
+        const noResultsDiv = document.getElementById('noResults');
+
+        function performSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            if (query === '') {
+                // Если поиск пустой — показываем все карточки
+                cards.forEach(card => {
+                    card.style.display = '';
+                });
+                visibleCount = cards.length;
+                listingsTitle.textContent = 'Популярное';
+                resultsCount.textContent = visibleCount + ' объявления';
+                noResultsDiv.style.display = 'none';
+            } else {
+                // Ищем совпадения
+                cards.forEach(card => {
+                    const cardName = card.getAttribute('data-name') || '';
+                    if (cardName.includes(query)) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (visibleCount === 0) {
+                    noResultsDiv.style.display = 'block';
+                    listingsTitle.textContent = 'Результаты поиска';
+                    resultsCount.textContent = 'ничего не найдено';
+                } else {
+                    noResultsDiv.style.display = 'none';
+                    listingsTitle.textContent = 'Результаты поиска';
+                    resultsCount.textContent = 'найдено ' + visibleCount + ' объявлений';
+                }
+            }
+        }
+
+        // Поиск по кнопке
+        searchButton.addEventListener('click', performSearch);
+
+        // Поиск по нажатию Enter
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Чтобы карточки кликались по всей области (а не только по картинке)
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                // Если кликнули не по кнопке и не по ссылке внутри
+                if (!e.target.closest('.btn-small')) {
+                    const link = this.querySelector('.card__image');
+                    if (link && link.getAttribute('onclick')) {
+                        eval(link.getAttribute('onclick'));
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
