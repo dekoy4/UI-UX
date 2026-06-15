@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Дрель Makita — Сосед.Велком</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
     <div class="app">
@@ -16,8 +16,8 @@
                         <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
                     </div>
                     <nav class="nav">
-                        <a href="index.html" class="nav__link">Главная</a>
-                        <a href="profile.html" class="nav__link active">Мои аренды</a>
+                        <a href="../index.html" class="nav__link">Главная</a>
+                        <a href="../profile.html" class="nav__link active">Мои аренды</a>
                     </nav>
                 </div>
             </div>
@@ -25,24 +25,22 @@
 
         <div class="container">
             <div class="item-layout">
-                <!-- Левая колонка — фото -->
                 <div class="item-gallery">
                     <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800&h=600&fit=crop" alt="Дрель Makita" class="item__main-image">
                 </div>
 
-                <!-- Правая колонка — информация -->
                 <div class="item-info">
                     <div class="item__price">300 ₽ <span>/ сутки</span></div>
                     <h1 class="item__title">Аккумуляторная дрель Makita</h1>
                     
-<div class="owner-card">
-    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="owner-card__avatar" alt="Антон">
-    <div class="owner-card__info">
-        <div class="owner-card__name">Антон, 32 года</div>
-        <div class="owner-card__rating">⭐ 4.9 · 23 отзыва · 7 этаж</div>
-        <div class="owner-card__verified">✓ Верифицированный сосед</div>
-    </div>
-</div>
+                    <div class="owner-card">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="owner-card__avatar" alt="Антон">
+                        <div class="owner-card__info">
+                            <div class="owner-card__name">Антон, 32 года</div>
+                            <div class="owner-card__rating">⭐ 4.9 · 23 отзыва · 7 этаж</div>
+                            <div class="owner-card__verified">✓ Верифицированный сосед</div>
+                        </div>
+                    </div>
 
                     <div class="item-tabs">
                         <button class="item-tab active" data-tab="desc">Описание</button>
@@ -78,7 +76,7 @@
                             <span>Итого за 1 сутки:</span>
                             <strong id="totalPrice">300 ₽</strong>
                         </div>
-                        <button class="btn-primary btn-block" onclick="location.href='booking.html'">Снять</button>
+                        <button class="btn-primary btn-block" onclick="location.href='../booking.html'">Снять</button>
                         <div class="booking-card__hint">Напишите соседу в чат после бронирования</div>
                     </div>
                 </div>
@@ -86,9 +84,8 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="../script.js"></script>
     <script>
-        // Простой расчет цены (для демо)
         const startInput = document.getElementById('startDate');
         const endInput = document.getElementById('endDate');
         const totalSpan = document.getElementById('totalPrice');
@@ -112,6 +109,12 @@
 
         startInput.addEventListener('change', calculateTotal);
         endInput.addEventListener('change', calculateTotal);
+
+        const today = new Date().toISOString().split('T')[0];
+        startInput.value = today;
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        endInput.value = tomorrow.toISOString().split('T')[0];
     </script>
 </body>
 </html>
