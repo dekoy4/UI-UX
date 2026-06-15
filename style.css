@@ -86,9 +86,10 @@ body {
     margin-bottom: 32px;
 }
 
+/* ========== SEARCH BAR ========== */
 .search-bar {
     max-width: 600px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px;
     display: flex;
     gap: 12px;
 }
@@ -123,34 +124,24 @@ body {
     background: #3d8b66;
 }
 
-.categories {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-}
-
-.categories__item {
+/* ========== NO RESULTS ========== */
+.no-results {
     text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.categories__item:hover {
-    transform: translateY(-4px);
-}
-
-.categories__icon {
-    font-size: 32px;
+    padding: 40px 20px;
     background: white;
-    width: 64px;
-    height: 64px;
-    border-radius: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    margin-bottom: 8px;
+    border-radius: 24px;
+    margin-top: 20px;
+}
+
+.no-results__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.no-results p {
+    color: #6B7280;
+    font-size: 16px;
 }
 
 /* ========== LISTINGS ========== */
@@ -299,6 +290,7 @@ body {
     width: 64px;
     height: 64px;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .owner-card__name {
@@ -390,6 +382,13 @@ body {
     font-size: 18px;
 }
 
+.booking-card__hint {
+    font-size: 12px;
+    color: #6B7280;
+    text-align: center;
+    margin-top: 12px;
+}
+
 /* ========== BUTTONS ========== */
 .btn-primary {
     background: #4CAF80;
@@ -429,6 +428,11 @@ body {
     font-size: 13px;
     cursor: pointer;
     margin-top: 8px;
+    transition: all 0.2s;
+}
+
+.btn-small:hover {
+    background: #3d8b66;
 }
 
 .btn-outline {
@@ -437,7 +441,16 @@ body {
     color: #4CAF80;
 }
 
-/* ========== PROFILE ========== */
+.btn-outline:hover {
+    background: #F0F9F4;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+/* ========== PROFILE PAGE ========== */
 .profile-header {
     display: flex;
     align-items: center;
@@ -453,6 +466,15 @@ body {
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
+}
+
+.profile-info h1 {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.profile-info p {
+    color: #6B7280;
 }
 
 .profile-tabs {
@@ -508,13 +530,23 @@ body {
     flex: 1;
 }
 
+.rental-card__info h3 {
+    margin-bottom: 4px;
+}
+
+.rental-card__info p {
+    color: #6B7280;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
 .status-badge {
     display: inline-block;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 500;
-    margin: 8px 0;
+    margin: 8px 8px 8px 0;
 }
 
 .status-active {
@@ -530,19 +562,6 @@ body {
 .status-pending {
     background: #FEF3C7;
     color: #D97706;
-}
-
-.empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    background: white;
-    border-radius: 24px;
-}
-
-.empty-state__icon {
-    font-size: 64px;
-    display: block;
-    margin-bottom: 16px;
 }
 
 /* ========== BOOKING PAGE ========== */
@@ -575,11 +594,28 @@ body {
     object-fit: cover;
 }
 
+.booking-item__info h3 {
+    margin-bottom: 4px;
+}
+
+.booking-item__info p {
+    color: #6B7280;
+    font-size: 14px;
+}
+
 .booking-dates {
     background: #F9FAFB;
     padding: 16px;
     border-radius: 16px;
     margin-bottom: 24px;
+}
+
+.booking-dates div {
+    margin-bottom: 8px;
+}
+
+.booking-dates div:last-child {
+    margin-bottom: 0;
 }
 
 .booking-price-list {
@@ -600,13 +636,29 @@ body {
     padding-top: 16px;
 }
 
+.booking-message {
+    margin: 16px 0;
+}
+
+.booking-message label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
 .booking-message textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #E5E7EB;
     border-radius: 16px;
     font-family: inherit;
-    margin: 16px 0;
+    font-size: 14px;
+    resize: vertical;
+}
+
+.booking-message textarea:focus {
+    outline: none;
+    border-color: #4CAF80;
 }
 
 .booking-note {
@@ -614,26 +666,6 @@ body {
     color: #6B7280;
     text-align: center;
     margin-top: 16px;
-}
-
-/* ========== NO RESULTS ========== */
-.no-results {
-    text-align: center;
-    padding: 40px 20px;
-    background: white;
-    border-radius: 24px;
-    margin-top: 20px;
-}
-
-.no-results__icon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 16px;
-}
-
-.no-results p {
-    color: #6B7280;
-    font-size: 16px;
 }
 
 /* ========== ADAPTIVE (MOBILE) ========== */
@@ -646,6 +678,10 @@ body {
         font-size: 32px;
     }
 
+    .hero__subtitle {
+        font-size: 16px;
+    }
+
     .cards-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -654,6 +690,15 @@ body {
     .item-layout {
         grid-template-columns: 1fr;
         gap: 24px;
+        margin: 24px 0;
+    }
+
+    .item__title {
+        font-size: 24px;
+    }
+
+    .item__price {
+        font-size: 28px;
     }
 
     .profile-header {
@@ -670,10 +715,6 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .categories {
-        gap: 20px;
-    }
-
     .search-bar {
         flex-direction: column;
     }
@@ -681,9 +722,42 @@ body {
     .search-bar__button {
         width: 100%;
     }
+
+    .listings__title {
+        font-size: 24px;
+    }
+
+    .booking-container {
+        margin: 24px auto;
+    }
+
+    .booking-summary {
+        padding: 20px;
+    }
+
+    .booking-title {
+        font-size: 24px;
+    }
+
+    .profile-tabs {
+        gap: 8px;
+    }
+
+    .profile-tab {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }
 
-.btn-block {
-    display: block;
-    width: 100%;
+/* ========== UTILITIES ========== */
+.text-center {
+    text-align: center;
+}
+
+.mt-16 {
+    margin-top: 16px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
 }
