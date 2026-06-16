@@ -36,7 +36,7 @@
                         <div class="item__price" aria-label="Цена: 300 рублей в сутки">300 ₽ <span>/ сутки</span></div>
                         <h1 class="item__title">Аккумуляторная дрель Makita</h1>
                         
-                        <div class="owner-card">
+                        <div class="owner-card" role="group" aria-label="Информация о владельце">
                             <img src="../images/avatar-anton.jpg" class="owner-card__avatar" alt="Антон, владелец дрели">
                             <div class="owner-card__info">
                                 <div class="owner-card__name">Антон, 32 года</div>
@@ -46,16 +46,49 @@
                         </div>
 
                         <div class="item-tabs" role="tablist" aria-label="Вкладки товара">
-                            <button class="item-tab active" data-tab="desc" role="tab" aria-selected="true" aria-controls="desc-panel" id="tab-desc" tabindex="0">Описание</button>
-                            <button class="item-tab" data-tab="rules" role="tab" aria-selected="false" aria-controls="rules-panel" id="tab-rules" tabindex="-1">Правила</button>
+                            <button 
+                                class="item-tab active" 
+                                data-tab="desc" 
+                                role="tab" 
+                                aria-selected="true" 
+                                aria-controls="desc-panel" 
+                                id="tab-desc" 
+                                tabindex="0"
+                            >
+                                Описание
+                            </button>
+                            <button 
+                                class="item-tab" 
+                                data-tab="rules" 
+                                role="tab" 
+                                aria-selected="false" 
+                                aria-controls="rules-panel" 
+                                id="tab-rules" 
+                                tabindex="-1"
+                            >
+                                Правила
+                            </button>
                         </div>
 
-                        <div class="item-tab-content active" id="desc-panel" role="tabpanel" aria-labelledby="tab-desc">
+                        <div 
+                            class="item-tab-content active" 
+                            id="desc-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-desc"
+                            aria-live="polite"
+                        >
                             <p>Отличная аккумуляторная дрель Makita. Заряда хватает на весь день. В комплекте: 2 аккумулятора, зарядное устройство, набор бит и сверл. Идеально для домашнего ремонта. Брал для сборки мебели — теперь стоит без дела.</p>
                             <p><strong>Состояние:</strong> Отличное, использовалась 3 раза.</p>
                         </div>
 
-                        <div class="item-tab-content" id="rules-panel" role="tabpanel" aria-labelledby="tab-rules">
+                        <div 
+                            class="item-tab-content" 
+                            id="rules-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-rules"
+                            aria-live="polite"
+                            hidden
+                        >
                             <ul style="margin: 0; padding-left: 20px;">
                                 <li>Вернуть в чистом виде</li>
                                 <li>Не использовать в промышленных целях</li>
@@ -109,8 +142,18 @@
         button:focus-visible,
         input:focus-visible,
         [tabindex]:focus-visible {
-            outline: 3px solid #4CAF80;
-            outline-offset: 2px;
+            outline: 3px solid #4CAF80 !important;
+            outline-offset: 2px !important;
+        }
+        /* Правильное скрытие контента */
+        .item-tab-content {
+            display: none;
+        }
+        .item-tab-content.active {
+            display: block;
+        }
+        .item-tab-content[hidden] {
+            display: none !important;
         }
     </style>
 
@@ -121,39 +164,59 @@
         const contents = document.querySelectorAll('.item-tab-content');
 
         function activateTab(tab) {
+            // Деактивировать все табы
             tabs.forEach(t => {
                 t.classList.remove('active');
                 t.setAttribute('aria-selected', 'false');
                 t.setAttribute('tabindex', '-1');
             });
-            contents.forEach(c => c.classList.remove('active'));
+            
+            // Скрыть все панели
+            contents.forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('hidden', '');
+            });
 
+            // Активировать выбранный таб
             tab.classList.add('active');
             tab.setAttribute('aria-selected', 'true');
             tab.setAttribute('tabindex', '0');
 
+            // Показать соответствующую панель
             const panelId = tab.getAttribute('aria-controls');
             const panel = document.getElementById(panelId);
             if (panel) {
                 panel.classList.add('active');
+                panel.removeAttribute('hidden');
+                
+                // Обновляем aria-live для чтения контента
+                panel.setAttribute('aria-live', 'polite');
             }
         }
 
+        // Обработчики для табов
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                activateTab(tab);
-                tab.focus();
+            tab.addEventListener('click', function(e) {
+                activateTab(this);
+                this.focus();
             });
-            tab.addEventListener('keydown', (e) => {
-                const currentIndex = Array.from(tabs).indexOf(tab);
+
+            tab.addEventListener('keydown', function(e) {
+                const currentIndex = Array.from(tabs).indexOf(this);
                 let newIndex = currentIndex;
 
-                if (e.key === 'ArrowRight') {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                     e.preventDefault();
                     newIndex = (currentIndex + 1) % tabs.length;
-                } else if (e.key === 'ArrowLeft') {
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                     e.preventDefault();
                     newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    newIndex = 0;
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    newIndex = tabs.length - 1;
                 }
 
                 if (newIndex !== currentIndex) {
