@@ -810,3 +810,53 @@ input:focus-visible,
     outline-offset: 4px;
     border-radius: 20px;
 }
+
+/* ========== ACCESSIBILITY FIXES ========== */
+
+/* Правильное скрытие контента для скринридеров */
+[hidden] {
+    display: none !important;
+}
+
+/* Вкладки должны правильно скрывать контент */
+.item-tab-content,
+.profile-tab-content {
+    display: none;
+}
+
+.item-tab-content.active,
+.profile-tab-content.active {
+    display: block;
+}
+
+/* Убеждаемся, что скринридер видит контент */
+.item-tab-content,
+.profile-tab-content {
+    visibility: visible;
+}
+
+.item-tab-content[hidden],
+.profile-tab-content[hidden] {
+    display: none !important;
+}
+
+/* Фокус для клавиатурной навигации */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #4CAF80 !important;
+    outline-offset: 2px !important;
+}
+
+/* Убеждаемся, что текст читается скринридером */
+.owner-card__info,
+.rental-card__info,
+.booking-item__info {
+    speak: auto;
+}
+
+/* Статусы должны читаться */
+.status-badge {
+    speak: auto;
+}
