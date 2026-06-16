@@ -143,16 +143,11 @@
             outline: 3px solid #4CAF80 !important;
             outline-offset: 2px !important;
         }
-        /* Управление вкладками через display, а не hidden */
         .item-tab-content {
             display: none;
         }
         .item-tab-content.active {
             display: block;
-        }
-        /* Убираем hidden */
-        .item-tab-content[hidden] {
-            display: none !important;
         }
     </style>
 
@@ -219,7 +214,6 @@
             });
         });
 
-        // Расчёт цены
         const startInput = document.getElementById('startDate');
         const endInput = document.getElementById('endDate');
         const totalSpan = document.getElementById('totalPrice');
