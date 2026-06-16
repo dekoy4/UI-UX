@@ -2,7 +2,7 @@
 
 > Проект по дисциплине «UI/UX-дизайнер». Интерактивный прототип веб-сервиса для P2P-шеринга (аренда вещей между соседями).
 
-**Живой сайт (GitHub Pages):** [https://ТВОЙ_ЛОГИН.github.io/neighbor-rental/](https://dekoy4.github.io/UI-UX/)
+**Живой сайт (GitHub Pages):** [Сайт](https://dekoy4.github.io/UI-UX/)
 
 ---
 
