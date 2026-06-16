@@ -36,7 +36,7 @@
                         <div class="item__price" aria-label="Цена: 150 рублей в сутки">150 ₽ <span>/ сутки</span></div>
                         <h1 class="item__title">Стремянка алюминиевая 4 ступени</h1>
                         
-                        <div class="owner-card">
+                        <div class="owner-card" role="group" aria-label="Информация о владельце">
                             <img src="../images/avatar-oleg.jpg" class="owner-card__avatar" alt="Олег, владелец стремянки">
                             <div class="owner-card__info">
                                 <div class="owner-card__name">Олег, 45 лет</div>
@@ -46,18 +46,51 @@
                         </div>
 
                         <div class="item-tabs" role="tablist" aria-label="Вкладки товара">
-                            <button class="item-tab active" data-tab="desc" role="tab" aria-selected="true" aria-controls="desc-panel" id="tab-desc" tabindex="0">Описание</button>
-                            <button class="item-tab" data-tab="rules" role="tab" aria-selected="false" aria-controls="rules-panel" id="tab-rules" tabindex="-1">Правила</button>
+                            <button 
+                                class="item-tab active" 
+                                data-tab="desc" 
+                                role="tab" 
+                                aria-selected="true" 
+                                aria-controls="desc-panel" 
+                                id="tab-desc" 
+                                tabindex="0"
+                            >
+                                Описание
+                            </button>
+                            <button 
+                                class="item-tab" 
+                                data-tab="rules" 
+                                role="tab" 
+                                aria-selected="false" 
+                                aria-controls="rules-panel" 
+                                id="tab-rules" 
+                                tabindex="-1"
+                            >
+                                Правила
+                            </button>
                         </div>
 
-                        <div class="item-tab-content active" id="desc-panel" role="tabpanel" aria-labelledby="tab-desc">
+                        <div 
+                            class="item-tab-content active" 
+                            id="desc-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-desc"
+                            aria-live="polite"
+                        >
                             <p>Алюминиевая стремянка, 4 ступени + широкая верхняя платформа. Высота в разложенном виде — 1.3 метра, выдерживает до 120 кг. Очень лёгкая (всего 4.5 кг), складывается в плоское состояние — удобно хранить в кладовке. Идеально для переклейки обоев, мытья люстры, замены лампочек, работы в гараже.</p>
                             <p><strong>Высота в сложенном виде:</strong> 145 см</p>
                             <p><strong>Материал:</strong> Алюминий, прорезиненные наконечники для пола</p>
                             <p><strong>Состояние:</strong> Как новая, использовалась 2 раза</p>
                         </div>
 
-                        <div class="item-tab-content" id="rules-panel" role="tabpanel" aria-labelledby="tab-rules">
+                        <div 
+                            class="item-tab-content" 
+                            id="rules-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-rules"
+                            aria-live="polite"
+                            hidden
+                        >
                             <ul style="margin: 0; padding-left: 20px;">
                                 <li>Использовать только на ровной поверхности</li>
                                 <li>Не вставать на верхнюю платформу</li>
@@ -112,8 +145,17 @@
         button:focus-visible,
         input:focus-visible,
         [tabindex]:focus-visible {
-            outline: 3px solid #4CAF80;
-            outline-offset: 2px;
+            outline: 3px solid #4CAF80 !important;
+            outline-offset: 2px !important;
+        }
+        .item-tab-content {
+            display: none;
+        }
+        .item-tab-content.active {
+            display: block;
+        }
+        .item-tab-content[hidden] {
+            display: none !important;
         }
     </style>
 
@@ -128,7 +170,10 @@
                 t.setAttribute('aria-selected', 'false');
                 t.setAttribute('tabindex', '-1');
             });
-            contents.forEach(c => c.classList.remove('active'));
+            contents.forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('hidden', '');
+            });
 
             tab.classList.add('active');
             tab.setAttribute('aria-selected', 'true');
@@ -138,24 +183,32 @@
             const panel = document.getElementById(panelId);
             if (panel) {
                 panel.classList.add('active');
+                panel.removeAttribute('hidden');
+                panel.setAttribute('aria-live', 'polite');
             }
         }
 
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                activateTab(tab);
-                tab.focus();
+            tab.addEventListener('click', function() {
+                activateTab(this);
+                this.focus();
             });
-            tab.addEventListener('keydown', (e) => {
-                const currentIndex = Array.from(tabs).indexOf(tab);
+            tab.addEventListener('keydown', function(e) {
+                const currentIndex = Array.from(tabs).indexOf(this);
                 let newIndex = currentIndex;
 
-                if (e.key === 'ArrowRight') {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                     e.preventDefault();
                     newIndex = (currentIndex + 1) % tabs.length;
-                } else if (e.key === 'ArrowLeft') {
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                     e.preventDefault();
                     newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    newIndex = 0;
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    newIndex = tabs.length - 1;
                 }
 
                 if (newIndex !== currentIndex) {
