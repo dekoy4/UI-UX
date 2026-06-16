@@ -668,6 +668,114 @@ body {
     margin-top: 16px;
 }
 
+/* ========== EMPTY STATE ========== */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 24px;
+    margin-top: 20px;
+}
+
+.empty-state__icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 16px;
+}
+
+.empty-state p {
+    color: #6B7280;
+    margin-bottom: 20px;
+}
+
+/* ========== ACCESSIBILITY ========== */
+
+/* Skip link - для пропуска навигации */
+.skip-link {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4CAF80;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    z-index: 1000;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.skip-link:focus {
+    top: 16px;
+}
+
+/* Скрытый визуально, но доступный для скринридеров */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+}
+
+/* Фокус для клавиатурной навигации */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid #4CAF80 !important;
+    outline-offset: 2px !important;
+}
+
+/* Карточки при фокусе с клавиатуры */
+.card .card__image:focus-visible {
+    outline: 3px solid #4CAF80;
+    outline-offset: 4px;
+    border-radius: 20px;
+}
+
+/* Правильное скрытие контента для скринридеров */
+[hidden] {
+    display: none !important;
+}
+
+/* Вкладки должны правильно скрывать контент */
+.item-tab-content,
+.profile-tab-content {
+    display: none;
+}
+
+.item-tab-content.active,
+.profile-tab-content.active {
+    display: block;
+}
+
+/* Убеждаемся, что скринридер видит контент */
+.item-tab-content,
+.profile-tab-content {
+    visibility: visible;
+}
+
+.item-tab-content[hidden],
+.profile-tab-content[hidden] {
+    display: none !important;
+}
+
+/* Убеждаемся, что текст читается скринридером */
+.owner-card__info,
+.rental-card__info,
+.booking-item__info {
+    speak: auto;
+}
+
+/* Статусы должны читаться */
+.status-badge {
+    speak: auto;
+}
+
 /* ========== ADAPTIVE (MOBILE) ========== */
 @media (max-width: 768px) {
     .container {
@@ -760,54 +868,4 @@ body {
 
 .mb-16 {
     margin-bottom: 16px;
-}
-
-/* ========== ACCESSIBILITY FIXES ========== */
-
-/* Правильное скрытие контента для скринридеров */
-[hidden] {
-    display: none !important;
-}
-
-/* Вкладки должны правильно скрывать контент */
-.item-tab-content,
-.profile-tab-content {
-    display: none;
-}
-
-.item-tab-content.active,
-.profile-tab-content.active {
-    display: block;
-}
-
-/* Убеждаемся, что скринридер видит контент */
-.item-tab-content,
-.profile-tab-content {
-    visibility: visible;
-}
-
-.item-tab-content[hidden],
-.profile-tab-content[hidden] {
-    display: none !important;
-}
-
-/* Фокус для клавиатурной навигации */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-[tabindex]:focus-visible {
-    outline: 3px solid #4CAF80 !important;
-    outline-offset: 2px !important;
-}
-
-/* Убеждаемся, что текст читается скринридером */
-.owner-card__info,
-.rental-card__info,
-.booking-item__info {
-    speak: auto;
-}
-
-/* Статусы должны читаться */
-.status-badge {
-    speak: auto;
 }
