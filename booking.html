@@ -7,15 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Skip link -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+
     <div class="app">
-        <header class="header">
+        <header class="header" role="banner" aria-label="Шапка сайта">
             <div class="container">
                 <div class="header__inner">
                     <div class="logo">
-                        <span class="logo__icon">🏠</span>
+                        <span class="logo__icon" aria-hidden="true">🏠</span>
                         <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
                     </div>
-                    <nav class="nav">
+                    <nav class="nav" role="navigation" aria-label="Главное меню">
                         <a href="index.html" class="nav__link">Главная</a>
                         <a href="profile.html" class="nav__link">Мои аренды</a>
                     </nav>
@@ -23,16 +26,54 @@
             </div>
         </header>
 
-        <div class="container">
-            <div class="booking-container">
-                <h1 class="booking-title">Подтверждение бронирования</h1>
-                
-                <div class="booking-summary" id="bookingSummary">
-                    <!-- Сюда динамически подставится информация о товаре -->
+        <main id="main-content" role="main">
+            <div class="container">
+                <div class="booking-container">
+                    <h1 class="booking-title">Подтверждение бронирования</h1>
+                    
+                    <div class="booking-summary" id="bookingSummary" role="form" aria-label="Форма бронирования">
+                        <!-- Сюда динамически подставится информация о товаре -->
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
+
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF80;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            top: 16px;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 3px solid #4CAF80;
+            outline-offset: 2px;
+        }
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            margin: -1px !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            border: 0 !important;
+        }
+    </style>
 
     <script>
         // База данных товаров
@@ -83,13 +124,11 @@
         const urlParams = new URLSearchParams(window.location.search);
         const itemId = urlParams.get('id');
 
-        // Если ID нет или он некорректный — показываем ошибку или перенаправляем
         let currentItem = itemsDB[itemId];
         if (!currentItem) {
-            currentItem = itemsDB['drill']; // по умолчанию дрель
+            currentItem = itemsDB['drill'];
         }
 
-        // Устанавливаем даты
         const today = new Date();
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -97,48 +136,57 @@
         const startDateStr = today.toISOString().split('T')[0];
         const endDateStr = tomorrow.toISOString().split('T')[0];
         
-        // Рассчитываем стоимость
         const days = 1;
         const rentPrice = currentItem.pricePerDay * days;
         const totalPrice = rentPrice + currentItem.deposit;
 
-        // Генерируем HTML для страницы бронирования
         const bookingHTML = `
             <div class="booking-item">
                 <img src="${currentItem.image}" class="booking-item__image" alt="${currentItem.name}">
                 <div class="booking-item__info">
-                    <h3>${currentItem.name}</h3>
+                    <h2 class="booking-item__title">${currentItem.name}</h2>
                     <p>${currentItem.owner} · ${currentItem.floor} этаж</p>
                 </div>
             </div>
 
-            <div class="booking-dates">
+            <div class="booking-dates" role="group" aria-label="Даты бронирования">
                 <div><strong>С ${startDateStr}</strong></div>
                 <div><strong>По ${endDateStr}</strong> (${days} сутки)</div>
             </div>
 
-            <div class="booking-price-list">
-                <div class="price-row">
-                    <span>Аренда (${days} сутки × ${currentItem.pricePerDay} ₽)</span>
-                    <span>${rentPrice} ₽</span>
+            <div class="booking-price-list" role="table" aria-label="Расчёт стоимости">
+                <div class="price-row" role="row">
+                    <span role="cell">Аренда (${days} сутки × ${currentItem.pricePerDay} ₽)</span>
+                    <span role="cell">${rentPrice} ₽</span>
                 </div>
-                <div class="price-row">
-                    <span>Залог (возвратный)</span>
-                    <span>${currentItem.deposit} ₽</span>
+                <div class="price-row" role="row">
+                    <span role="cell">Залог (возвратный)</span>
+                    <span role="cell">${currentItem.deposit} ₽</span>
                 </div>
-                <div class="price-row total">
-                    <span>Итого к оплате</span>
-                    <span>${totalPrice} ₽</span>
+                <div class="price-row total" role="row">
+                    <span role="cell">Итого к оплате</span>
+                    <span role="cell">${totalPrice} ₽</span>
                 </div>
             </div>
 
             <div class="booking-message">
-                <label>Сообщение для ${currentItem.owner} (необязательно)</label>
-                <textarea rows="3" placeholder="Напишите, когда удобно забрать..."></textarea>
+                <label for="messageInput">Сообщение для ${currentItem.owner} (необязательно)</label>
+                <textarea 
+                    id="messageInput" 
+                    rows="3" 
+                    placeholder="Напишите, когда удобно забрать..."
+                    aria-label="Сообщение для владельца"
+                ></textarea>
             </div>
 
-            <button class="btn-primary btn-block" onclick="alert('Запрос отправлен! Скоро с вами свяжется ${currentItem.owner} ✅')">Отправить запрос</button>
-            <div class="booking-note">
+            <button 
+                class="btn-primary btn-block" 
+                onclick="alert('Запрос отправлен! Скоро с вами свяжется ${currentItem.owner} ✅')"
+                aria-label="Отправить запрос на бронирование"
+            >
+                Отправить запрос
+            </button>
+            <div class="booking-note" role="note">
                 🔒 Оплата только после подтверждения соседом. Залог заморозится на карте.
             </div>
         `;
