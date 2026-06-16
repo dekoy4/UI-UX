@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+
     <div class="app">
-        <header class="header">
+        <header class="header" role="banner" aria-label="Шапка сайта">
             <div class="container">
                 <div class="header__inner">
                     <div class="logo">
-                        <span class="logo__icon">🏠</span>
+                        <span class="logo__icon" aria-hidden="true">🏠</span>
                         <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
                     </div>
-                    <nav class="nav">
+                    <nav class="nav" role="navigation" aria-label="Главное меню">
                         <a href="../index.html" class="nav__link">Главная</a>
                         <a href="../profile.html" class="nav__link">Мои аренды</a>
                     </nav>
@@ -23,70 +25,144 @@
             </div>
         </header>
 
-        <div class="container">
-            <div class="item-layout">
-                <div class="item-gallery">
-                    <img src="../images/snowboard.jpg" alt="Сноуборд Burton" class="item__main-image">
-                </div>
-
-                <div class="item-info">
-                    <div class="item__price">500 ₽ <span>/ сутки</span></div>
-                    <h1 class="item__title">Сноуборд Burton 158 см</h1>
-                    
-                    <div class="owner-card">
-                        <img src="../images/avatar-ekaterina.jpg" class="owner-card__avatar" alt="Екатерина">
-                        <div class="owner-card__info">
-                            <div class="owner-card__name">Екатерина, 29 лет</div>
-                            <div class="owner-card__rating">⭐ 5.0 · 12 отзывов · 15 этаж</div>
-                            <div class="owner-card__verified">✓ Верифицированный сосед</div>
-                        </div>
+        <main id="main-content" role="main">
+            <div class="container">
+                <div class="item-layout">
+                    <div class="item-gallery">
+                        <img src="../images/snowboard.jpg" alt="Сноуборд Burton на снегу" class="item__main-image">
                     </div>
 
-                    <div class="item-tabs">
-                        <button class="item-tab active" data-tab="desc">Описание</button>
-                        <button class="item-tab" data-tab="rules">Правила</button>
-                    </div>
-
-                    <div class="item-tab-content active" id="desc">
-                        <p>Сноуборд Burton 2023 года, размер 158 см. Идеален для среднего и продвинутого уровня. Крепления Burton Custom. Доска в отличном состоянии — каталась всего 5 раз в Сочи. Скользяк намазан, канты заточены. Полный комплект: доска, крепления, чехол.</p>
-                        <p><strong>Ростовка:</strong> под рост 170-185 см</p>
-                        <p><strong>Состояние:</strong> Отличное, царапин нет</p>
-                    </div>
-
-                    <div class="item-tab-content" id="rules">
-                        <ul style="margin: 0; padding-left: 20px;">
-                            <li>Не кататься по камням и асфальту</li>
-                            <li>Вернуть в чистом виде (можно протереть)</li>
-                            <li>При поломке креплений — сообщить сразу</li>
-                            <li>Залог 2000 ₽, возвращается после проверки</li>
-                        </ul>
-                    </div>
-
-                    <div class="booking-card">
-                        <div class="booking-card__dates">
-                            <div class="date-field">
-                                <label>С</label>
-                                <input type="date" id="startDate" class="date-input">
-                            </div>
-                            <div class="date-field">
-                                <label>По</label>
-                                <input type="date" id="endDate" class="date-input">
+                    <div class="item-info">
+                        <div class="item__price" aria-label="Цена: 500 рублей в сутки">500 ₽ <span>/ сутки</span></div>
+                        <h1 class="item__title">Сноуборд Burton 158 см</h1>
+                        
+                        <div class="owner-card">
+                            <img src="../images/avatar-ekaterina.jpg" class="owner-card__avatar" alt="Екатерина, владелица сноуборда">
+                            <div class="owner-card__info">
+                                <div class="owner-card__name">Екатерина, 29 лет</div>
+                                <div class="owner-card__rating" aria-label="Рейтинг 5 из 5, 12 отзывов">⭐ 5.0 · 12 отзывов · 15 этаж</div>
+                                <div class="owner-card__verified" aria-label="Верифицированный сосед">✓ Верифицированный сосед</div>
                             </div>
                         </div>
-                        <div class="booking-card__total">
-                            <span>Итого за 1 сутки:</span>
-                            <strong id="totalPrice">500 ₽</strong>
+
+                        <div class="item-tabs" role="tablist" aria-label="Вкладки товара">
+                            <button class="item-tab active" data-tab="desc" role="tab" aria-selected="true" aria-controls="desc-panel" id="tab-desc" tabindex="0">Описание</button>
+                            <button class="item-tab" data-tab="rules" role="tab" aria-selected="false" aria-controls="rules-panel" id="tab-rules" tabindex="-1">Правила</button>
                         </div>
-                        <button class="btn-primary btn-block" onclick="location.href='../booking.html?id=snowboard'">Снять</button>
-                        <div class="booking-card__hint">Напишите соседу в чат после бронирования</div>
+
+                        <div class="item-tab-content active" id="desc-panel" role="tabpanel" aria-labelledby="tab-desc">
+                            <p>Сноуборд Burton 2023 года, размер 158 см. Идеален для среднего и продвинутого уровня. Крепления Burton Custom. Доска в отличном состоянии — каталась всего 5 раз в Сочи. Скользяк намазан, канты заточены. Полный комплект: доска, крепления, чехол.</p>
+                            <p><strong>Ростовка:</strong> под рост 170-185 см</p>
+                            <p><strong>Состояние:</strong> Отличное, царапин нет</p>
+                        </div>
+
+                        <div class="item-tab-content" id="rules-panel" role="tabpanel" aria-labelledby="tab-rules">
+                            <ul style="margin: 0; padding-left: 20px;">
+                                <li>Не кататься по камням и асфальту</li>
+                                <li>Вернуть в чистом виде (можно протереть)</li>
+                                <li>При поломке креплений — сообщить сразу</li>
+                                <li>Залог 2000 ₽, возвращается после проверки</li>
+                            </ul>
+                        </div>
+
+                        <div class="booking-card" role="form" aria-label="Форма бронирования">
+                            <div class="booking-card__dates">
+                                <div class="date-field">
+                                    <label for="startDate">С</label>
+                                    <input type="date" id="startDate" class="date-input" aria-label="Дата начала аренды">
+                                </div>
+                                <div class="date-field">
+                                    <label for="endDate">По</label>
+                                    <input type="date" id="endDate" class="date-input" aria-label="Дата окончания аренды">
+                                </div>
+                            </div>
+                            <div class="booking-card__total">
+                                <span>Итого за 1 сутки:</span>
+                                <strong id="totalPrice" aria-live="polite">500 ₽</strong>
+                            </div>
+                            <button class="btn-primary btn-block" onclick="location.href='../booking.html?id=snowboard'" aria-label="Снять сноуборд в аренду">Снять</button>
+                            <div class="booking-card__hint">Напишите соседу в чат после бронирования</div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
+
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF80;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            top: 16px;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 3px solid #4CAF80;
+            outline-offset: 2px;
+        }
+    </style>
 
     <script src="../script.js"></script>
     <script>
+        const tabs = document.querySelectorAll('.item-tab');
+        const contents = document.querySelectorAll('.item-tab-content');
+
+        function activateTab(tab) {
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            contents.forEach(c => c.classList.remove('active'));
+
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            tab.setAttribute('tabindex', '0');
+
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+            if (panel) {
+                panel.classList.add('active');
+            }
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                activateTab(tab);
+                tab.focus();
+            });
+            tab.addEventListener('keydown', (e) => {
+                const currentIndex = Array.from(tabs).indexOf(tab);
+                let newIndex = currentIndex;
+
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    newIndex = (currentIndex + 1) % tabs.length;
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                }
+
+                if (newIndex !== currentIndex) {
+                    activateTab(tabs[newIndex]);
+                    tabs[newIndex].focus();
+                }
+            });
+        });
+
         const startInput = document.getElementById('startDate');
         const endInput = document.getElementById('endDate');
         const totalSpan = document.getElementById('totalPrice');
