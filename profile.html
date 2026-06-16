@@ -33,7 +33,7 @@
                     </div>
                     <div class="profile-info">
                         <h1>Алексей, 28 лет</h1>
-                        <p>⭐ 4.95 · 14 отзывов · Сосед с 2024</p>
+                        <p aria-label="Рейтинг 4.95 из 5, 14 отзывов, сосед с 2024 года">⭐ 4.95 · 14 отзывов · Сосед с 2024</p>
                     </div>
                 </div>
 
@@ -62,57 +62,60 @@
                     </button>
                 </div>
 
+                <!-- Панель: Арендую я -->
                 <div 
                     class="profile-tab-content active" 
                     id="renting-panel" 
                     role="tabpanel" 
                     aria-labelledby="tab-renting"
-                    aria-live="polite"
                 >
                     <h2 class="visually-hidden">Арендую я</h2>
                     
-                    <div class="rental-card" role="group" aria-label="Активная аренда: Сноуборд Burton">
+                    <!-- Карточка 1 -->
+                    <div class="rental-card" role="article" aria-label="Активная аренда: Сноуборд Burton 158 см">
                         <img src="images/snowboard.jpg" class="rental-card__image" alt="Сноуборд Burton 158 см">
                         <div class="rental-card__info">
-                            <h3>Сноуборд Burton 158 см</h3>
-                            <p>Екатерина · до 20 мая</p>
-                            <span class="status-badge status-active" role="status">Активно</span>
-                            <button class="btn-small" aria-label="Продлить аренду сноуборда">Продлить</button>
+                            <h3 class="rental-card__title">Сноуборд Burton 158 см</h3>
+                            <p class="rental-card__owner">Владелец: Екатерина, до 20 мая</p>
+                            <span class="status-badge status-active" role="status">Статус: Активно</span>
+                            <button class="btn-small" aria-label="Продлить аренду сноуборда Burton">Продлить</button>
                         </div>
                     </div>
                     
-                    <div class="rental-card" role="group" aria-label="Завершённая аренда: Проектор XGIMI">
+                    <!-- Карточка 2 -->
+                    <div class="rental-card" role="article" aria-label="Завершённая аренда: Проектор XGIMI Halo Plus">
                         <img src="images/projector.jpg" class="rental-card__image" alt="Проектор XGIMI Halo Plus">
                         <div class="rental-card__info">
-                            <h3>Проектор XGIMI Halo+</h3>
-                            <p>Максим · завершено 10 мая</p>
-                            <span class="status-badge status-completed" role="status">Завершено</span>
-                            <button class="btn-small btn-outline" aria-label="Оставить отзыв о проекторе">Оставить отзыв</button>
+                            <h3 class="rental-card__title">Проектор XGIMI Halo+</h3>
+                            <p class="rental-card__owner">Владелец: Максим, завершено 10 мая</p>
+                            <span class="status-badge status-completed" role="status">Статус: Завершено</span>
+                            <button class="btn-small btn-outline" aria-label="Оставить отзыв о проекторе XGIMI">Оставить отзыв</button>
                         </div>
                     </div>
                 </div>
 
+                <!-- Панель: Сдают у меня -->
                 <div 
                     class="profile-tab-content" 
                     id="lending-panel" 
                     role="tabpanel" 
                     aria-labelledby="tab-lending"
-                    aria-live="polite"
                     hidden
                 >
                     <h2 class="visually-hidden">Сдают у меня</h2>
                     
-                    <div class="rental-card" role="group" aria-label="Активное объявление: Павербанк Baseus">
+                    <!-- Карточка 3 -->
+                    <div class="rental-card" role="article" aria-label="Активное объявление: Павербанк Baseus">
                         <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100&h=100&fit=crop" class="rental-card__image" alt="Павербанк Baseus 20000 mAh">
                         <div class="rental-card__info">
-                            <h3>Павербанк Baseus 20000 mAh</h3>
-                            <p>Свободно · 300 ₽/сутки</p>
-                            <span class="status-badge status-active" role="status">Активно</span>
-                            <button class="btn-small" aria-label="Редактировать объявление павербанка">Редактировать</button>
+                            <h3 class="rental-card__title">Павербанк Baseus 20000 mAh</h3>
+                            <p class="rental-card__owner">Свободно · 300 ₽/сутки</p>
+                            <span class="status-badge status-active" role="status">Статус: Активно</span>
+                            <button class="btn-small" aria-label="Редактировать объявление павербанка Baseus">Редактировать</button>
                         </div>
                     </div>
                     
-                    <div class="empty-state" role="status" aria-live="polite">
+                    <div class="empty-state" role="status">
                         <span class="empty-state__icon" aria-hidden="true">📦</span>
                         <p>Хотите сдавать больше вещей?</p>
                         <button class="btn-secondary" aria-label="Добавить новое объявление">+ Добавить объявление</button>
@@ -181,6 +184,87 @@
         .profile-tab-content[hidden] {
             display: none !important;
         }
+        /* Стили для карточек */
+        .rental-card__title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .rental-card__owner {
+            font-size: 14px;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        .rental-card {
+            display: flex;
+            gap: 20px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .rental-card__image {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            object-fit: cover;
+        }
+        .rental-card__info {
+            flex: 1;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin: 8px 8px 8px 0;
+        }
+        .status-active {
+            background: #E5F4ED;
+            color: #4CAF80;
+        }
+        .status-completed {
+            background: #E5E7EB;
+            color: #6B7280;
+        }
+        .status-pending {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+        .btn-small {
+            background: #4CAF80;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 13px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .btn-small:hover {
+            background: #3d8b66;
+        }
+        .btn-outline {
+            background: white;
+            border: 1px solid #4CAF80;
+            color: #4CAF80;
+        }
+        .btn-outline:hover {
+            background: #F0F9F4;
+        }
+        .btn-secondary {
+            background: white;
+            color: #4CAF80;
+            border: 2px solid #4CAF80;
+            padding: 12px 24px;
+            border-radius: 48px;
+            font-weight: 600;
+            cursor: pointer;
+        }
     </style>
 
     <script>
@@ -213,7 +297,6 @@
             if (panel) {
                 panel.classList.add('active');
                 panel.removeAttribute('hidden');
-                panel.setAttribute('aria-live', 'polite');
             }
         }
 
