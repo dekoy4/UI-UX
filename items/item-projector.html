@@ -36,7 +36,7 @@
                         <div class="item__price" aria-label="Цена: 400 рублей в сутки">400 ₽ <span>/ сутки</span></div>
                         <h1 class="item__title">Проектор XGIMI Halo+</h1>
                         
-                        <div class="owner-card">
+                        <div class="owner-card" role="group" aria-label="Информация о владельце">
                             <img src="../images/avatar-maxim.jpg" class="owner-card__avatar" alt="Максим, владелец проектора">
                             <div class="owner-card__info">
                                 <div class="owner-card__name">Максим, 27 лет</div>
@@ -46,17 +46,50 @@
                         </div>
 
                         <div class="item-tabs" role="tablist" aria-label="Вкладки товара">
-                            <button class="item-tab active" data-tab="desc" role="tab" aria-selected="true" aria-controls="desc-panel" id="tab-desc" tabindex="0">Описание</button>
-                            <button class="item-tab" data-tab="rules" role="tab" aria-selected="false" aria-controls="rules-panel" id="tab-rules" tabindex="-1">Правила</button>
+                            <button 
+                                class="item-tab active" 
+                                data-tab="desc" 
+                                role="tab" 
+                                aria-selected="true" 
+                                aria-controls="desc-panel" 
+                                id="tab-desc" 
+                                tabindex="0"
+                            >
+                                Описание
+                            </button>
+                            <button 
+                                class="item-tab" 
+                                data-tab="rules" 
+                                role="tab" 
+                                aria-selected="false" 
+                                aria-controls="rules-panel" 
+                                id="tab-rules" 
+                                tabindex="-1"
+                            >
+                                Правила
+                            </button>
                         </div>
 
-                        <div class="item-tab-content active" id="desc-panel" role="tabpanel" aria-labelledby="tab-desc">
+                        <div 
+                            class="item-tab-content active" 
+                            id="desc-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-desc"
+                            aria-live="polite"
+                        >
                             <p>Портативный проектор XGIMI Halo+ с аккумулятором. Разрешение 1080p, яркость 900 люмен, встроенный Android TV, автоподстройка фокуса. Можно смотреть YouTube, Netflix, KinoPoisk. Заряда хватает на 2 часа фильма, можно подключить к розетке. В комплекте: проектор, пульт, чехол, зарядка.</p>
                             <p><strong>Идеально для:</strong> Киновечеров, презентаций, игр (HDMI вход)</p>
                             <p><strong>Комплект:</strong> Проектор + пульт + блок питания + чехол</p>
                         </div>
 
-                        <div class="item-tab-content" id="rules-panel" role="tabpanel" aria-labelledby="tab-rules">
+                        <div 
+                            class="item-tab-content" 
+                            id="rules-panel" 
+                            role="tabpanel" 
+                            aria-labelledby="tab-rules"
+                            aria-live="polite"
+                            hidden
+                        >
                             <ul style="margin: 0; padding-left: 20px;">
                                 <li>Использовать в чистом помещении</li>
                                 <li>Не включать без присмотра</li>
@@ -110,8 +143,17 @@
         button:focus-visible,
         input:focus-visible,
         [tabindex]:focus-visible {
-            outline: 3px solid #4CAF80;
-            outline-offset: 2px;
+            outline: 3px solid #4CAF80 !important;
+            outline-offset: 2px !important;
+        }
+        .item-tab-content {
+            display: none;
+        }
+        .item-tab-content.active {
+            display: block;
+        }
+        .item-tab-content[hidden] {
+            display: none !important;
         }
     </style>
 
@@ -126,7 +168,10 @@
                 t.setAttribute('aria-selected', 'false');
                 t.setAttribute('tabindex', '-1');
             });
-            contents.forEach(c => c.classList.remove('active'));
+            contents.forEach(c => {
+                c.classList.remove('active');
+                c.setAttribute('hidden', '');
+            });
 
             tab.classList.add('active');
             tab.setAttribute('aria-selected', 'true');
@@ -136,24 +181,32 @@
             const panel = document.getElementById(panelId);
             if (panel) {
                 panel.classList.add('active');
+                panel.removeAttribute('hidden');
+                panel.setAttribute('aria-live', 'polite');
             }
         }
 
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                activateTab(tab);
-                tab.focus();
+            tab.addEventListener('click', function() {
+                activateTab(this);
+                this.focus();
             });
-            tab.addEventListener('keydown', (e) => {
-                const currentIndex = Array.from(tabs).indexOf(tab);
+            tab.addEventListener('keydown', function(e) {
+                const currentIndex = Array.from(tabs).indexOf(this);
                 let newIndex = currentIndex;
 
-                if (e.key === 'ArrowRight') {
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
                     e.preventDefault();
                     newIndex = (currentIndex + 1) % tabs.length;
-                } else if (e.key === 'ArrowLeft') {
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
                     e.preventDefault();
                     newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                } else if (e.key === 'Home') {
+                    e.preventDefault();
+                    newIndex = 0;
+                } else if (e.key === 'End') {
+                    e.preventDefault();
+                    newIndex = tabs.length - 1;
                 }
 
                 if (newIndex !== currentIndex) {
