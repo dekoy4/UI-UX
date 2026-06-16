@@ -274,7 +274,7 @@
 
 **Способ 1 (через Git):**
 git clone https://dekoy4.github.io/UI-UX/
-cd neighbor-rental
+cd UI/UX
 
 **Способ 2 (простой):**
 Просто откройте файл `index.html` в любом современном браузере.
