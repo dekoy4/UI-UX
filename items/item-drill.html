@@ -75,7 +75,6 @@
                             id="desc-panel" 
                             role="tabpanel" 
                             aria-labelledby="tab-desc"
-                            aria-live="polite"
                         >
                             <p>Отличная аккумуляторная дрель Makita. Заряда хватает на весь день. В комплекте: 2 аккумулятора, зарядное устройство, набор бит и сверл. Идеально для домашнего ремонта. Брал для сборки мебели — теперь стоит без дела.</p>
                             <p><strong>Состояние:</strong> Отличное, использовалась 3 раза.</p>
@@ -86,8 +85,7 @@
                             id="rules-panel" 
                             role="tabpanel" 
                             aria-labelledby="tab-rules"
-                            aria-live="polite"
-                            hidden
+                            style="display: none;"
                         >
                             <ul style="margin: 0; padding-left: 20px;">
                                 <li>Вернуть в чистом виде</li>
@@ -145,13 +143,14 @@
             outline: 3px solid #4CAF80 !important;
             outline-offset: 2px !important;
         }
-        /* Правильное скрытие контента */
+        /* Управление вкладками через display, а не hidden */
         .item-tab-content {
             display: none;
         }
         .item-tab-content.active {
             display: block;
         }
+        /* Убираем hidden */
         .item-tab-content[hidden] {
             display: none !important;
         }
@@ -159,7 +158,6 @@
 
     <script src="../script.js"></script>
     <script>
-        // Переключение табов
         const tabs = document.querySelectorAll('.item-tab');
         const contents = document.querySelectorAll('.item-tab-content');
 
@@ -174,7 +172,7 @@
             // Скрыть все панели
             contents.forEach(c => {
                 c.classList.remove('active');
-                c.setAttribute('hidden', '');
+                c.style.display = 'none';
             });
 
             // Активировать выбранный таб
@@ -187,20 +185,15 @@
             const panel = document.getElementById(panelId);
             if (panel) {
                 panel.classList.add('active');
-                panel.removeAttribute('hidden');
-                
-                // Обновляем aria-live для чтения контента
-                panel.setAttribute('aria-live', 'polite');
+                panel.style.display = 'block';
             }
         }
 
-        // Обработчики для табов
         tabs.forEach(tab => {
-            tab.addEventListener('click', function(e) {
+            tab.addEventListener('click', function() {
                 activateTab(this);
                 this.focus();
             });
-
             tab.addEventListener('keydown', function(e) {
                 const currentIndex = Array.from(tabs).indexOf(this);
                 let newIndex = currentIndex;
