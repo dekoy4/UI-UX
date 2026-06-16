@@ -7,78 +7,113 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Skip link -->
+    <a href="#main-content" class="skip-link">Перейти к основному содержанию</a>
+
     <div class="app">
-        <header class="header">
+        <header class="header" role="banner" aria-label="Шапка сайта">
             <div class="container">
                 <div class="header__inner">
                     <div class="logo">
-                        <span class="logo__icon">🏠</span>
+                        <span class="logo__icon" aria-hidden="true">🏠</span>
                         <span class="logo__text">Сосед.<span class="logo__accent">Велком</span></span>
                     </div>
-                    <nav class="nav">
+                    <nav class="nav" role="navigation" aria-label="Главное меню">
                         <a href="index.html" class="nav__link">Главная</a>
-                        <a href="profile.html" class="nav__link active">Мои аренды</a>
+                        <a href="profile.html" class="nav__link active" aria-current="page">Мои аренды</a>
                     </nav>
                 </div>
             </div>
         </header>
 
-        <div class="container">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <img src="images/avatar-aleksey.jpg" alt="Вы">
-                </div>
-                <div class="profile-info">
-                    <h1>Алексей, 28 лет</h1>
-                    <p>⭐ 4.95 · 14 отзывов · Сосед с 2024</p>
-                </div>
-            </div>
-
-            <div class="profile-tabs">
-                <button class="profile-tab active" data-tab="renting">Арендую я</button>
-                <button class="profile-tab" data-tab="lending">Сдают у меня</button>
-            </div>
-
-            <!-- Вкладка: Арендую я (то, что Алексей арендует у других) -->
-            <div class="profile-tab-content active" id="renting">
-                <div class="rental-card">
-                    <img src="images/snowboard.jpg" class="rental-card__image">
-                    <div class="rental-card__info">
-                        <h3>Сноуборд Burton 158 см</h3>
-                        <p>Екатерина · до 20 мая</p>
-                        <span class="status-badge status-active">Активно</span>
-                        <button class="btn-small">Продлить</button>
+        <main id="main-content" role="main">
+            <div class="container">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <img src="images/avatar-aleksey.jpg" alt="Алексей, 28 лет, аватар профиля">
+                    </div>
+                    <div class="profile-info">
+                        <h1>Алексей, 28 лет</h1>
+                        <p>⭐ 4.95 · 14 отзывов · Сосед с 2024</p>
                     </div>
                 </div>
-                <div class="rental-card">
-                    <img src="images/projector.jpg" class="rental-card__image">
-                    <div class="rental-card__info">
-                        <h3>Проектор XGIMI Halo+</h3>
-                        <p>Максим · завершено 10 мая</p>
-                        <span class="status-badge status-completed">Завершено</span>
-                        <button class="btn-small btn-outline">Оставить отзыв</button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Вкладка: Сдают у меня (собственные товары Алексея) -->
-            <div class="profile-tab-content" id="lending">
-                <div class="rental-card">
-                    <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100&h=100&fit=crop" class="rental-card__image">
-                    <div class="rental-card__info">
-                        <h3>Павербанк Baseus 20000 mAh</h3>
-                        <p>Свободно · 300 ₽/сутки</p>
-                        <span class="status-badge status-active">Активно</span>
-                        <button class="btn-small">Редактировать</button>
+                <div class="profile-tabs" role="tablist" aria-label="Вкладки профиля">
+                    <button 
+                        class="profile-tab active" 
+                        data-tab="renting" 
+                        role="tab" 
+                        aria-selected="true" 
+                        aria-controls="renting-panel"
+                        id="tab-renting"
+                        tabindex="0"
+                    >
+                        Арендую я
+                    </button>
+                    <button 
+                        class="profile-tab" 
+                        data-tab="lending" 
+                        role="tab" 
+                        aria-selected="false" 
+                        aria-controls="lending-panel"
+                        id="tab-lending"
+                        tabindex="-1"
+                    >
+                        Сдают у меня
+                    </button>
+                </div>
+
+                <div 
+                    class="profile-tab-content active" 
+                    id="renting-panel" 
+                    role="tabpanel" 
+                    aria-labelledby="tab-renting"
+                >
+                    <h2 class="visually-hidden">Арендую я</h2>
+                    <div class="rental-card">
+                        <img src="images/snowboard.jpg" class="rental-card__image" alt="Сноуборд Burton 158 см">
+                        <div class="rental-card__info">
+                            <h3>Сноуборд Burton 158 см</h3>
+                            <p>Екатерина · до 20 мая</p>
+                            <span class="status-badge status-active" role="status">Активно</span>
+                            <button class="btn-small" aria-label="Продлить аренду сноуборда">Продлить</button>
+                        </div>
+                    </div>
+                    <div class="rental-card">
+                        <img src="images/projector.jpg" class="rental-card__image" alt="Проектор XGIMI Halo Plus">
+                        <div class="rental-card__info">
+                            <h3>Проектор XGIMI Halo+</h3>
+                            <p>Максим · завершено 10 мая</p>
+                            <span class="status-badge status-completed" role="status">Завершено</span>
+                            <button class="btn-small btn-outline" aria-label="Оставить отзыв о проекторе">Оставить отзыв</button>
+                        </div>
                     </div>
                 </div>
-                <div class="empty-state">
-                    <span class="empty-state__icon">📦</span>
-                    <p>Хотите сдавать больше вещей?</p>
-                    <button class="btn-secondary">+ Добавить объявление</button>
+
+                <div 
+                    class="profile-tab-content" 
+                    id="lending-panel" 
+                    role="tabpanel" 
+                    aria-labelledby="tab-lending"
+                >
+                    <h2 class="visually-hidden">Сдают у меня</h2>
+                    <div class="rental-card">
+                        <img src="https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=100&h=100&fit=crop" class="rental-card__image" alt="Павербанк Baseus 20000 mAh">
+                        <div class="rental-card__info">
+                            <h3>Павербанк Baseus 20000 mAh</h3>
+                            <p>Свободно · 300 ₽/сутки</p>
+                            <span class="status-badge status-active" role="status">Активно</span>
+                            <button class="btn-small" aria-label="Редактировать объявление павербанка">Редактировать</button>
+                        </div>
+                    </div>
+                    <div class="empty-state">
+                        <span class="empty-state__icon" aria-hidden="true">📦</span>
+                        <p>Хотите сдавать больше вещей?</p>
+                        <button class="btn-secondary" aria-label="Добавить новое объявление">+ Добавить объявление</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <style>
@@ -98,20 +133,94 @@
             color: #6B7280;
             margin-bottom: 20px;
         }
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            margin: -1px !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            border: 0 !important;
+        }
+        .skip-link {
+            position: absolute;
+            top: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #4CAF80;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            z-index: 1000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            top: 16px;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [tabindex]:focus-visible {
+            outline: 3px solid #4CAF80;
+            outline-offset: 2px;
+        }
     </style>
 
     <script>
-        // Переключение табов
+        // Переключение табов с доступностью
         const tabs = document.querySelectorAll('.profile-tab');
         const contents = document.querySelectorAll('.profile-tab-content');
 
+        function activateTab(tab) {
+            // Деактивировать все табы
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+                t.setAttribute('tabindex', '-1');
+            });
+            
+            // Скрыть все панели
+            contents.forEach(c => {
+                c.classList.remove('active');
+            });
+
+            // Активировать выбранный таб
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            tab.setAttribute('tabindex', '0');
+
+            // Показать соответствующую панель
+            const panelId = tab.getAttribute('aria-controls');
+            const panel = document.getElementById(panelId);
+            if (panel) {
+                panel.classList.add('active');
+            }
+        }
+
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                const target = tab.dataset.tab;
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                contents.forEach(c => c.classList.remove('active'));
-                document.getElementById(target).classList.add('active');
+                activateTab(tab);
+                tab.focus();
+            });
+
+            tab.addEventListener('keydown', (e) => {
+                const currentIndex = Array.from(tabs).indexOf(tab);
+                let newIndex = currentIndex;
+
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    newIndex = (currentIndex + 1) % tabs.length;
+                } else if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                }
+
+                if (newIndex !== currentIndex) {
+                    activateTab(tabs[newIndex]);
+                    tabs[newIndex].focus();
+                }
             });
         });
     </script>
